@@ -12,7 +12,6 @@ const generateTokens = (user) => {
 }
 const userControllers = {
     signUp: async (req, res) =>{
-        console.log("Received Sign Up petition:" + Date())
         const {lastName, firstName, password, eMail} = req.body
         let hashedPass = bcryptjs.hashSync(password)
         const newUser = new User({
@@ -32,7 +31,6 @@ const userControllers = {
         }
     },
     signIn: async (req, res)=>{
-        console.log("Received Sign In petition:" + Date())
         const {eMail, password} = req.body
         try{
             let user = await User.findOne({eMail})
@@ -46,7 +44,6 @@ const userControllers = {
         }
     },
     refreshToken: async (req, res) =>{
-        console.log("Received Valid from Local Storage User Check Petition:" + Date())
         try{
             const {headers, user} = req
             if(!headers.authorization)throw new Error('Bad headers')
